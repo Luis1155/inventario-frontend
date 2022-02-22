@@ -1,45 +1,43 @@
-import axios from "axios";
 import React, { useState } from "react";
+import axios from "axios";
 
-const ArticuloNew = ({ cancelar, artEdit }) => {
-  const [articulo, setArticulo] = useState(
-    artEdit
-      ? artEdit
+const BodegaNew = ({ cancelar, bodEdit }) => {
+  const [bodega, setBodega] = useState(
+    bodEdit
+      ? bodEdit
       : {
           identificador: "",
           nombre: "",
-          descripcion: "",
-          precio_unidad: 0,
+          direccion: "",
         }
   );
 
   const handleInputChange = (e) => {
-    setArticulo({ ...articulo, [e.target.name]: e.target.value });
+    setBodega({ ...bodega, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(artEdit);
-    artEdit
-      ? putUpdateArticulo(articulo, articulo._id)
-      : postCreateArticulo(articulo);
+    bodEdit 
+      ? putUpdateBodega(bodega, bodega._id)
+      : postCreateBodega(bodega);
   };
 
-  const postCreateArticulo = async (articulo) => {
+  const postCreateBodega = async (bodega) => {
     const res = await axios.post(
-      "https://inventario-fonseca.herokuapp.com/articulos",
-      articulo
+      "https://inventario-fonseca.herokuapp.com/bodegas",
+      bodega
     );
     window.location.reload();
   };
 
-  const putUpdateArticulo = async (articulo, id) => {
-    delete articulo["_id"];
-    delete articulo["createdAt"];
-    delete articulo["updatedAt"];
+  const putUpdateBodega = async (bodega, id) => {
+    delete bodega["_id"];
+    delete bodega["createdAt"];
+    delete bodega["updatedAt"];
     const res = await axios.put(
-      `https://inventario-fonseca.herokuapp.com/articulos/${id}`,
-      articulo
+      `https://inventario-fonseca.herokuapp.com/bodegas/${id}`,
+      bodega
     );
     window.location.reload();
   };
@@ -66,7 +64,7 @@ const ArticuloNew = ({ cancelar, artEdit }) => {
           <input
             type="text"
             name="identificador"
-            placeholder={artEdit ? artEdit.identificador : ""}
+            placeholder={bodEdit ? bodEdit.identificador : ""}
             onChange={handleInputChange}
           />
         </div>
@@ -75,25 +73,16 @@ const ArticuloNew = ({ cancelar, artEdit }) => {
           <input
             type="text"
             name="nombre"
-            placeholder={artEdit ? artEdit.nombre : ""}
+            placeholder={bodEdit ? bodEdit.nombre : ""}
             onChange={handleInputChange}
           />
         </div>
         <div style={{ marginBottom: 10 }}>
-          <label>Descripcion: </label>
+          <label>Dirección: </label>
           <input
             type="text"
-            name="descripcion"
-            placeholder={artEdit ? artEdit.descripcion : ""}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div style={{ marginBottom: 10 }}>
-          <label>Precio unidad: </label>
-          <input
-            type="number"
-            name="precio_unidad"
-            placeholder={artEdit ? artEdit.precio_unidad : ""}
+            name="direccion"
+            placeholder={bodEdit ? bodEdit.direccion : ""}
             onChange={handleInputChange}
           />
         </div>
@@ -112,4 +101,4 @@ const ArticuloNew = ({ cancelar, artEdit }) => {
   );
 };
 
-export default ArticuloNew;
+export default BodegaNew;

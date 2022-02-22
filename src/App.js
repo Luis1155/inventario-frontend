@@ -1,27 +1,38 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 
 import "./App.css";
-import ArticuloNew from "./Articulos/ArticuloNew";
-import ArticulosList from "./Articulos/ArticulosList";
-import BodegasList from "./Bodegas/BodegasList";
+import Articulos from "./Articulos/Articulos";
+import Bodegas from "./Bodegas/Bodegas";
 
 function App() {
-  const headerComponent = () => {
-    return <div className="Component">lsdkafñlsfkña</div>;
+  const Navbar = () => {
+    return (
+      <div style={{ display: "flex" }}>
+        <Link to={"/articulos"} style={{ flex: 1, height: 50 }}>
+          <h4>Articulos</h4>
+        </Link>
+        <Link to={"/bodegas"} style={{ flex: 1, height: 50 }}>
+          <h4>Bodegas</h4>
+        </Link>
+        <Link to={"/"} style={{ flex: 1, height: 50 }}>
+          <h4>Transacciones</h4>
+        </Link>
+      </div>
+    );
   };
 
   return (
     <div className="App">
-      {headerComponent()}
-      <table width={"100%"}>
-        <th>
-          <ArticulosList />
-          <ArticuloNew />
-        </th>
-        <th>
-          <BodegasList />
-        </th>
-      </table>
+      <BrowserRouter>
+        <Navbar />
+        <div className="container">
+          <Routes>
+            <Route root path="/articulos" element={<Articulos />} />
+            <Route path="/bodegas" element={<Bodegas />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
     </div>
   );
 }
