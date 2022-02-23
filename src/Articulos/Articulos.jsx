@@ -18,7 +18,13 @@ const Articulos = () => {
         }}
       >
         <h3 style={{ margin: 5 }}>Lista de Articulos</h3>
-        <button onClick={() => setAdd(true)} style={{ height: 20 }}>
+        <button
+          onClick={() => {
+            setArtEdit("");
+            setAdd(true);
+          }}
+          style={{ height: 20 }}
+        >
           Agregar
         </button>
       </div>
