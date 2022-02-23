@@ -26,7 +26,6 @@ const TransaccionNew = ({
     e.preventDefault();
     transaccion.fecha = moment().format("YYYY-MM-DD");
     transaccion.hora = moment().format("hh:mm a");
-    console.log(transaccion);
     postCreateTransaccion(transaccion);
   };
 
@@ -45,7 +44,6 @@ const TransaccionNew = ({
       obtenerTransacciones();
     }
     cancelar();
-    // window.location.reload();
   };
 
   return (

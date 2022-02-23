@@ -26,10 +26,12 @@ const ArticuloNew = ({ cancelar, artEdit }) => {
   };
 
   const postCreateArticulo = async (articulo) => {
-    const res = await axios.post(
+    const {data} = await axios.post(
       `${config.endPointURL}/articulos`,
       articulo
     );
+    if (data.error) {
+      alert(data.message);
     window.location.reload();
   };
 
@@ -37,10 +39,12 @@ const ArticuloNew = ({ cancelar, artEdit }) => {
     delete articulo["_id"];
     delete articulo["createdAt"];
     delete articulo["updatedAt"];
-    const res = await axios.put(
+    const {data} = await axios.put(
       `${config.endPointURL}/articulos/${id}`,
       articulo
     );
+    if (data.error) {
+      alert(data.message);
     window.location.reload();
   };
 

@@ -13,12 +13,16 @@ const Bodegas = () => {
   const [articulosBodega, setArticulosBodega] = useState([]);
 
   const getArticulosDeBodega = async (bodega) => {
-    let res = await axios.get(
+    let { data } = await axios.get(
       `${config.endPointURL}/bodegas_articulos/${bodega._id}`
     );
-    setArticulosBodega(res.data);
-    setBodSelect(bodega);
-    setShowArt(true);
+    if (data.error) {
+      alert(data.message);
+    } else {
+      setArticulosBodega(data);
+      setBodSelect(bodega);
+      setShowArt(true);
+    }
   };
 
   return (
