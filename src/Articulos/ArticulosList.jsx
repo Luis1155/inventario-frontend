@@ -11,8 +11,7 @@ const ArticulosList = ({ editar }) => {
 
   const getArticulos = async () => {
     let { data } = await axios.get(`${config.endPointURL}/articulos`);
-    if (data.error) {
-      alert(data.message);
+    if (data.error) alert(data.message);
     setArticulos(data);
   };
   return (

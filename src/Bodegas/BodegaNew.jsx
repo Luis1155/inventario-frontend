@@ -23,9 +23,8 @@ const BodegaNew = ({ cancelar, bodEdit }) => {
   };
 
   const postCreateBodega = async (bodega) => {
-    const {data} = await axios.post(`${config.endPointURL}/bodegas`, bodega);
-    if (data.error) {
-      alert(data.message);
+    const { data } = await axios.post(`${config.endPointURL}/bodegas`, bodega);
+    if (data.error) alert(data.message);
     window.location.reload();
   };
 
@@ -33,9 +32,11 @@ const BodegaNew = ({ cancelar, bodEdit }) => {
     delete bodega["_id"];
     delete bodega["createdAt"];
     delete bodega["updatedAt"];
-    const {data} = await axios.put(`${config.endPointURL}/bodegas/${id}`, bodega);
-    if (data.error) {
-      alert(data.message);
+    const { data } = await axios.put(
+      `${config.endPointURL}/bodegas/${id}`,
+      bodega
+    );
+    if (data.error) alert(data.message);
     window.location.reload();
   };
 

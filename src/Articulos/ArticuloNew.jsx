@@ -1,5 +1,5 @@
-import axios from "axios";
 import React, { useState } from "react";
+import axios from "axios";
 import config from "../config";
 
 const ArticuloNew = ({ cancelar, artEdit }) => {
@@ -26,12 +26,11 @@ const ArticuloNew = ({ cancelar, artEdit }) => {
   };
 
   const postCreateArticulo = async (articulo) => {
-    const {data} = await axios.post(
+    const { data } = await axios.post(
       `${config.endPointURL}/articulos`,
       articulo
     );
-    if (data.error) {
-      alert(data.message);
+    if (data.error) alert(data.message);
     window.location.reload();
   };
 
@@ -39,12 +38,11 @@ const ArticuloNew = ({ cancelar, artEdit }) => {
     delete articulo["_id"];
     delete articulo["createdAt"];
     delete articulo["updatedAt"];
-    const {data} = await axios.put(
+    const { data } = await axios.put(
       `${config.endPointURL}/articulos/${id}`,
       articulo
     );
-    if (data.error) {
-      alert(data.message);
+    if (data.error) alert(data.message);
     window.location.reload();
   };
 

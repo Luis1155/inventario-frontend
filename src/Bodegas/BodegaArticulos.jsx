@@ -13,7 +13,7 @@ const BodegaArticulos = ({ articulos, bodega, obtenerArticulos }) => {
 
   const getArticulos = async () => {
     let { data } = await axios.get(`${config.endPointURL}/articulos`);
-    if (data.error) {
+    if (data.error)
       alert(data.message);
     setArticulosAll(data);
   };
