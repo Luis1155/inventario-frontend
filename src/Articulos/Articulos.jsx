@@ -17,7 +17,7 @@ const Articulos = () => {
           alignItems: "center",
         }}
       >
-        <h3 style={{ margin: 5 }}>Articulos</h3>
+        <h3 style={{ margin: 5 }}>Lista de Articulos</h3>
         <button onClick={() => setAdd(true)} style={{ height: 20 }}>
           Agregar
         </button>

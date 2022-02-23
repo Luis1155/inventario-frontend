@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import config from "../config";
 
-const BodegasList = ({ editar }) => {
+const BodegasList = ({ editar, obtener }) => {
   const [bodegas, setBodegas] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("https://inventario-fonseca.herokuapp.com/bodegas")
-      .then(({ data }) => {
-        console.log(data);
-        setBodegas(data);
-      });
+    getBodegas();
   }, []);
+
+  const getBodegas = async () => {
+    let { data } = await axios.get(`${config.endPointURL}/bodegas`);
+    setBodegas(data);
+  };
 
   return (
     <table width={"100%"}>
@@ -29,7 +30,7 @@ const BodegasList = ({ editar }) => {
           <tbody key={b._id}>
             <tr>
               <td>
-                <button>Ver</button>
+                <button onClick={() => obtener(b)}>Ver</button>
               </td>
               <td>
                 <button onClick={() => editar(b)}>Editar</button>

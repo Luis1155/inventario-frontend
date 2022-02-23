@@ -2,8 +2,9 @@ import React from "react";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 
 import "./App.css";
-import Articulos from "./Articulos/Articulos";
 import Bodegas from "./Bodegas/Bodegas";
+import Articulos from "./Articulos/Articulos";
+import Transacciones from "./Transacciones/Transacciones";
 
 function App() {
   const Navbar = () => {
@@ -15,7 +16,7 @@ function App() {
         <Link to={"/bodegas"} style={{ flex: 1, height: 50 }}>
           <h4>Bodegas</h4>
         </Link>
-        <Link to={"/"} style={{ flex: 1, height: 50 }}>
+        <Link to={"/transacciones"} style={{ flex: 1, height: 50 }}>
           <h4>Transacciones</h4>
         </Link>
       </div>
@@ -30,6 +31,7 @@ function App() {
           <Routes>
             <Route root path="/articulos" element={<Articulos />} />
             <Route path="/bodegas" element={<Bodegas />} />
+            <Route path="/transacciones" element={<Transacciones />} />
           </Routes>
         </div>
       </BrowserRouter>

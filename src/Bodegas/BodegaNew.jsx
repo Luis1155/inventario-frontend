@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import config from "../config";
 
 const BodegaNew = ({ cancelar, bodEdit }) => {
   const [bodega, setBodega] = useState(
@@ -18,16 +19,11 @@ const BodegaNew = ({ cancelar, bodEdit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    bodEdit 
-      ? putUpdateBodega(bodega, bodega._id)
-      : postCreateBodega(bodega);
+    bodEdit ? putUpdateBodega(bodega, bodega._id) : postCreateBodega(bodega);
   };
 
   const postCreateBodega = async (bodega) => {
-    const res = await axios.post(
-      "https://inventario-fonseca.herokuapp.com/bodegas",
-      bodega
-    );
+    const res = await axios.post(`${config.endPointURL}/bodegas`, bodega);
     window.location.reload();
   };
 
@@ -35,10 +31,7 @@ const BodegaNew = ({ cancelar, bodEdit }) => {
     delete bodega["_id"];
     delete bodega["createdAt"];
     delete bodega["updatedAt"];
-    const res = await axios.put(
-      `https://inventario-fonseca.herokuapp.com/bodegas/${id}`,
-      bodega
-    );
+    const res = await axios.put(`${config.endPointURL}/bodegas/${id}`, bodega);
     window.location.reload();
   };
 

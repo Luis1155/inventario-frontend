@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import config from "../config";
 
 const ArticulosList = ({ editar }) => {
   const [articulos, setArticulos] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("https://inventario-fonseca.herokuapp.com/articulos")
-      .then(({ data }) => {
-        console.log(data);
-        setArticulos(data);
-      });
+    getArticulos();
   }, []);
 
+  const getArticulos = async () => {
+    let { data } = await axios.get(`${config.endPointURL}/articulos`);
+    setArticulos(data);
+  };
   return (
     <table width={"100%"}>
       <thead>

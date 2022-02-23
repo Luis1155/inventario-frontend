@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import config from "../config";
 
 const ArticuloNew = ({ cancelar, artEdit }) => {
   const [articulo, setArticulo] = useState(
@@ -19,7 +20,6 @@ const ArticuloNew = ({ cancelar, artEdit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(artEdit);
     artEdit
       ? putUpdateArticulo(articulo, articulo._id)
       : postCreateArticulo(articulo);
@@ -27,7 +27,7 @@ const ArticuloNew = ({ cancelar, artEdit }) => {
 
   const postCreateArticulo = async (articulo) => {
     const res = await axios.post(
-      "https://inventario-fonseca.herokuapp.com/articulos",
+      `${config.endPointURL}/articulos`,
       articulo
     );
     window.location.reload();
@@ -38,7 +38,7 @@ const ArticuloNew = ({ cancelar, artEdit }) => {
     delete articulo["createdAt"];
     delete articulo["updatedAt"];
     const res = await axios.put(
-      `https://inventario-fonseca.herokuapp.com/articulos/${id}`,
+      `${config.endPointURL}/articulos/${id}`,
       articulo
     );
     window.location.reload();

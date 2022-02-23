@@ -1,11 +1,25 @@
 import React, { useState } from "react";
+import axios from "axios";
+import config from "../config";
 
 import BodegaNew from "./BodegaNew";
 import BodegasList from "./BodegasList";
+import BodegaArticulos from "./BodegaArticulos";
 
 const Bodegas = () => {
   const [add, setAdd] = useState(false);
-  const [bodEdit, setBodEdit] = useState("");
+  const [bodSelect, setBodSelect] = useState("");
+  const [showArt, setShowArt] = useState(false);
+  const [articulosBodega, setArticulosBodega] = useState([]);
+
+  const getArticulosDeBodega = async (bodega) => {
+    let res = await axios.get(
+      `${config.endPointURL}/bodegas_articulos/${bodega._id}`
+    );
+    setArticulosBodega(res.data);
+    setBodSelect(bodega);
+    setShowArt(true);
+  };
 
   return (
     <div>
@@ -17,26 +31,51 @@ const Bodegas = () => {
           alignItems: "center",
         }}
       >
-        <h3 style={{ margin: 5 }}>Bodegas</h3>
-        <button onClick={() => setAdd(true)} style={{ height: 20 }}>
-          Agregar
+        <h3 style={{ margin: 5 }}>Lista de Bodegas</h3>
+        <button
+          onClick={() => {
+            setAdd(true);
+            setBodSelect("");
+            setShowArt(false);
+          }}
+          style={{ height: 20 }}
+        >
+          Nueva bodega
         </button>
       </div>
       <BodegasList
+        obtener={(bodega) => {
+          getArticulosDeBodega(bodega);
+          setAdd(false);
+        }}
         editar={(bod) => {
-          setBodEdit(bod);
+          setShowArt(false);
+          setBodSelect(bod);
           setAdd(true);
         }}
       />
-      <hr />
+
       {add && (
-        <BodegaNew
-          cancelar={() => {
-            setAdd(false);
-            setBodEdit('')
-          }}
-          bodEdit={bodEdit}
-        />
+        <>
+          <hr />
+          <BodegaNew
+            cancelar={() => {
+              setAdd(false);
+              setBodSelect("");
+            }}
+            bodEdit={bodSelect}
+          />
+        </>
+      )}
+      {showArt && (
+        <>
+          <hr />
+          <BodegaArticulos
+            articulos={articulosBodega}
+            bodega={bodSelect}
+            obtenerArticulos={() => getArticulosDeBodega(bodSelect)}
+          />
+        </>
       )}
     </div>
   );
