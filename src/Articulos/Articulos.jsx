@@ -28,15 +28,17 @@ const Articulos = () => {
           setAdd(true);
         }}
       />
-      <hr />
       {add && (
-        <ArticuloNew
-          cancelar={() => {
-            setAdd(false);
-            setArtEdit("");
-          }}
-          artEdit={artEdit}
-        />
+        <>
+          <hr />
+          <ArticuloNew
+            cancelar={() => {
+              setAdd(false);
+              setArtEdit("");
+            }}
+            artEdit={artEdit}
+          />
+        </>
       )}
     </div>
   );

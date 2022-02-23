@@ -1,4 +1,4 @@
-let localDebug = true,
+let localDebug = false,
   prodEndpoint = "https://inventario-fonseca.herokuapp.com",
   localEndpoint = "http://localhost:4000";
 
